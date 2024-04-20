@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\IntravisionTestTask.Domain\IntravisionTestTask.Domain.csproj" />
   </ItemGroup>
 

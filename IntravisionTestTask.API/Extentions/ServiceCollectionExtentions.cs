@@ -1,6 +1,8 @@
-﻿using IntravisionTestTask.DAL.EF;
+﻿using AutoMapper;
+using IntravisionTestTask.DAL.EF;
 using IntravisionTestTask.Domain.Definitions;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace IntravisionTestTask.API.Extentions
 {
@@ -16,6 +18,13 @@ namespace IntravisionTestTask.API.Extentions
             {
                 options.UseNpgsql(connectionString, o => o.MigrationsAssembly(migrationAssembly));
             });
+        }
+
+        public static void ConfigureAutoMapper(this IServiceCollection services, params Assembly[] assembliesToScan)
+        {
+            var mapperConfigurations = new MapperConfiguration(config => config.AddMaps(assembliesToScan));
+            var mapper = mapperConfigurations.CreateMapper();
+            services.AddSingleton(mapper);
         }
     }
 }
