@@ -1,0 +1,6 @@
+﻿﻿в не зависимости от SQLProvider, необходимо указать тип БД в качестве SQLProvider в appsettings.json/appsettings.Development.json (например MSSQL);
+
+add-migration {migration-title} -p {migration-storage-project} -s {startup-project}
+drop-database -p {migration-storage-project} -s {startup-project}
+
+update-database
