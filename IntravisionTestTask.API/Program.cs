@@ -8,7 +8,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.ConfigureDbContext(builder);
 builder.Services.ConfigureAutoMapper(typeof(ProductTypeProfile).Assembly);
-builder.Services.RegistrateServices();
+builder.Services.RegisterServices();
 
 var app = builder.Build();
 

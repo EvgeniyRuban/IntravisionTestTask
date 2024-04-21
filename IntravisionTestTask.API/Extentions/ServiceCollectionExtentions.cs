@@ -30,7 +30,7 @@ namespace IntravisionTestTask.API.Extentions
             services.AddSingleton(mapper);
         }
 
-        public static void RegistrateServices(this IServiceCollection services)
+        public static void RegisterServices(this IServiceCollection services)
         {
             services.AddScoped<ICrudRepository<ProductType, Guid>, ProductTypeRepository>();
             services.AddScoped<ICrudRepository<Product, Guid>, ProductRepository>();

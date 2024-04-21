@@ -1,6 +1,8 @@
 ﻿using IntravisionTestTask.Domain.Entities;
-using IntravisionTestTask.Domain.Repositories;
 
-public interface IProductSlotRepostiory : ICrudRepository<ProductSlot, Guid>
+namespace IntravisionTestTask.Domain.Repositories
 {
+    public interface IProductSlotRepostiory : ICrudRepository<ProductSlot, Guid>
+    {
+    }
 }
