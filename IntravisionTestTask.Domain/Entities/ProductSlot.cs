@@ -10,9 +10,15 @@ namespace IntravisionTestTask.Domain.Entities
         [Required]
         [InverseProperty(nameof(Entities.Product.Id))]
         public Guid ProductId { get; set; }
+
+        [Required]
+        [InverseProperty(nameof(Entities.ProductMachine.Id))]
+        public Guid ProductMachineId { get; set; }
+
         [Required]
         public int Capacity { get; set; }
 
         public Product Product { get; set; } = null!;
+        public ProductMachine ProductMachine { get; set; } = null!;
     }
 }

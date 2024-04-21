@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using IntravisionTestTask.Domain.Dto;
 using IntravisionTestTask.Domain.Entities;
 
 namespace IntravisionTestTask.Domain.MapperProfiles
@@ -8,6 +9,10 @@ namespace IntravisionTestTask.Domain.MapperProfiles
         public ProductSlotProfile()
         {
             CreateMap<ProductSlot, ProductSlot>();
+            CreateMap<ProductSlotToCreate, ProductSlot>();
+            CreateMap<ProductSlotToUpdate, ProductSlot>();
+            CreateMap<ProductSlot, ProductSlotToGet>();
+            CreateMap<ProductSlot[], ProductSlotToGet[]>();
         }
     }
 }

@@ -30,7 +30,7 @@ namespace IntravisionTestTask.DAL.Repositories
         }
         public async Task Delete(TKey id, CancellationToken cancellationToken)
         {
-            var entityToDelete = await Context.Set<TEntity>().FirstOrDefaultAsync(e => e.Equals(id), cancellationToken);
+            var entityToDelete = await Context.Set<TEntity>().FirstOrDefaultAsync(e => e.Id.Equals(id), cancellationToken);
 
             if (entityToDelete is null) 
             {

@@ -3,12 +3,12 @@ using IntravisionTestTask.Domain.MapperProfiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 
 builder.Services.ConfigureDbContext(builder);
 builder.Services.ConfigureAutoMapper(typeof(ProductTypeProfile).Assembly);
-builder.Services.RegistrateServices();
+builder.Services.RegisterServices();
 
 var app = builder.Build();
 
@@ -17,5 +17,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseRouting();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.Run();
