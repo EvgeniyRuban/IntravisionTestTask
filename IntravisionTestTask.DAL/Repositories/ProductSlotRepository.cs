@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IntravisionTestTask.DAL.Repositories
 {
-    public class ProductSlotRepository : IProductSlotRepostiory
+    public class ProductSlotRepository : IProductSlotRepository
     {
         private readonly ApplicationContext _context;
         private IMapper _mapper;

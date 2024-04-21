@@ -6,18 +6,18 @@ namespace IntravisionTestTask.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductTypesController : ControllerBase
+    public class ProductsController : ControllerBase
     {
-        private readonly IProductTypeService _service;
+        private readonly IProductService _service;
 
-        public ProductTypesController(IProductTypeService service)
+        public ProductsController(IProductService service)
         {
             _service = service;
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProductTypeToGet>> Add(
-            [FromBody] ProductTypeToCreate dto,
+        public async Task<ActionResult<ProductToGet>> Add(
+            [FromBody] ProductToCreate dto,
             CancellationToken cancellationToken)
         {
             var result = await _service.Add(dto, cancellationToken);
@@ -34,7 +34,7 @@ namespace IntravisionTestTask.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductTypeToGet>> Get(
+        public async Task<ActionResult<ProductToGet>> Get(
             [FromRoute] Guid id,
             CancellationToken cancellationToken)
         {
@@ -43,15 +43,15 @@ namespace IntravisionTestTask.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ICollection<ProductTypeToGet>>> GetAll(CancellationToken cancellationToken)
+        public async Task<ActionResult<ICollection<ProductToGet>>> GetAll(CancellationToken cancellationToken)
         {
-            var productTypes = await _service.GetAll(cancellationToken);
-            return Ok(productTypes);
+            var result = await _service.GetAll(cancellationToken);
+            return Ok(result);
         }
 
         [HttpPut]
         public async Task<ActionResult> Update(
-            [FromBody] ProductTypeToUpdate dto,
+            [FromBody] ProductToUpdate dto,
             CancellationToken cancellationToken)
         {
             await _service.Update(dto, cancellationToken);

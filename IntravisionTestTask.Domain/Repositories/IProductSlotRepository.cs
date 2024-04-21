@@ -2,7 +2,7 @@
 
 namespace IntravisionTestTask.Domain.Repositories
 {
-    public interface IProductSlotRepostiory : ICrudRepository<ProductSlot, Guid>
+    public interface IProductSlotRepository : ICrudRepository<ProductSlot, Guid>
     {
     }
 }

@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
+using IntravisionTestTask.Business.Services;
 using IntravisionTestTask.DAL.EF;
 using IntravisionTestTask.DAL.Repositories;
 using IntravisionTestTask.Domain.Definitions;
-using IntravisionTestTask.Domain.Entities;
 using IntravisionTestTask.Domain.Repositories;
+using IntravisionTestTask.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -32,10 +33,13 @@ namespace IntravisionTestTask.API.Extentions
 
         public static void RegisterServices(this IServiceCollection services)
         {
-            services.AddScoped<ICrudRepository<ProductType, Guid>, ProductTypeRepository>();
-            services.AddScoped<ICrudRepository<Product, Guid>, ProductRepository>();
-            services.AddScoped<ICrudRepository<ProductSlot, Guid>, ProductSlotRepository>();
-            services.AddScoped<ICrudRepository<ProductMachine, Guid>, ProductMachineRepository>();
+            services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductSlotRepository, ProductSlotRepository>();
+            services.AddScoped<IProductMachineRepository, ProductMachineRepository>();
+
+            services.AddScoped<IProductTypeService, ProductTypeService>();
+            services.AddScoped<IProductService, ProductService>();
         }
     }
 }
