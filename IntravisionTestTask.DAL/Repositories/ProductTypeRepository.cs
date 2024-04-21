@@ -20,6 +20,13 @@ namespace IntravisionTestTask.DAL.Repositories
 
         public async Task<ProductType> Add(ProductType entity, CancellationToken cancellationToken)
         {
+            var titleExists = await _context.ProductTypes.AnyAsync(pt => pt.Title == entity.Title);
+
+            if (titleExists)
+            {
+                throw new EntityAlreadyExistsException();
+            }
+
             var newEntity = await _context.ProductTypes.AddAsync(entity, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
             return newEntity.Entity;
@@ -51,6 +58,13 @@ namespace IntravisionTestTask.DAL.Repositories
             if (entity == null)
             {
                 throw new EntityNotFoundException(typeof(ProductType));
+            }
+
+            var titleExists = await _context.ProductTypes.AnyAsync(p => p.Title == entityToUpdate.Title, cancellationToken);
+
+            if (titleExists)
+            {
+                throw new EntityAlreadyExistsException();
             }
 
             _mapper.Map(entityToUpdate, entity);

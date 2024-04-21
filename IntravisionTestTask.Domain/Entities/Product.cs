@@ -11,8 +11,10 @@ namespace IntravisionTestTask.Domain.Entities
         [Required]
         [InverseProperty(nameof(Entities.ProductType.Id))]
         public Guid ProductTypeId { get; set; }
+
         [Required]
         public string Title { get; set; } = null!;
+
         [Required]
         public decimal Price { get; set; }
         public string ImageUrl { get; set; } = null!;

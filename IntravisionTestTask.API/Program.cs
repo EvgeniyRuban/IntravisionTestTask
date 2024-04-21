@@ -12,6 +12,8 @@ builder.Services.RegisterServices();
 
 var app = builder.Build();
 
+app.ConfigureExceptionHandler(app.Logger);
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -19,7 +21,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
-
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
