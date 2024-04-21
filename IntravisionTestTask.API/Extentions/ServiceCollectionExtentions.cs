@@ -40,6 +40,8 @@ namespace IntravisionTestTask.API.Extentions
 
             services.AddScoped<IProductTypeService, ProductTypeService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductSlotService, ProductSlotService>();
+            services.AddScoped<IProductMachineService, ProductMachineService>();
         }
     }
 }
