@@ -38,11 +38,15 @@ namespace IntravisionTestTask.DAL.Repositories
         }
         public async Task<ProductMachine?> Get(Guid id, CancellationToken cancellationToken)
         {
-            return await _context.ProductMachines.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
+            return await _context.ProductMachines
+                .Include(pm => pm.ProductSlots)
+                .FirstOrDefaultAsync(pm => pm.Id == id, cancellationToken);
         }
         public async Task<ICollection<ProductMachine>> GetAll(CancellationToken cancellationToken)
         {
-            return await _context.ProductMachines.ToListAsync(cancellationToken);
+            return await _context.ProductMachines
+                .Include(pm => pm.ProductSlots)
+                .ToListAsync(cancellationToken);
         }
         public async Task Update(ProductMachine entityToUpdate, CancellationToken cancellationToken)
         {

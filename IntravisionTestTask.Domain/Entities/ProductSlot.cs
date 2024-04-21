@@ -18,7 +18,7 @@ namespace IntravisionTestTask.Domain.Entities
         [Required]
         public int Capacity { get; set; }
 
-        public Product Product { get; set; } = null!;
-        public ProductMachine ProductMachine { get; set; } = null!;
+        public Product Product { get; set; }
+        public ProductMachine ProductMachine { get; set; }
     }
 }

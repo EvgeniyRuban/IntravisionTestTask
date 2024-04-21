@@ -5,5 +5,6 @@ namespace IntravisionTestTask.Domain.Dto
     public class ProductMachineToGet : IGetDto<ProductMachine, Guid>
     {
         public Guid Id { get; set; }
+        public ICollection<ProductSlotToGet> ProductSlots { get; set; }
     }
 }
