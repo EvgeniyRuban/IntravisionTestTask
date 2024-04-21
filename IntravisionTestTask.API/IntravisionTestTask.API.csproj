@@ -18,7 +18,7 @@
     <ProjectReference Include="..\IntravisionTestTask.DAL\IntravisionTestTask.DAL.csproj" />
     <ProjectReference Include="..\IntravisionTestTask.Domain\IntravisionTestTask.Domain.csproj" />
     <ProjectReference Include="..\IntravisionTestTask.PostgreSQL\IntravisionTestTask.PostgreSQL.csproj" />
-    <ProjectReference Include="..\IntravisionTestTask.Services\IntravisionTestTask.Services.csproj" />
+    <ProjectReference Include="..\IntravisionTestTask.Services\IntravisionTestTask.Business.csproj" />
   </ItemGroup>
 
 </Project>
