@@ -1,5 +1,7 @@
-﻿
-public class ProductToCreate
+﻿using IntravisionTestTask.Domain.Dto;
+using IntravisionTestTask.Domain.Entities;
+
+public class ProductToCreate : ICreateDto<Product, Guid>
 {
     public Guid ProductTypeId { get; set; }
     public string Title { get; set; }

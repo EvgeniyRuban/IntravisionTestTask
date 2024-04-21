@@ -1,6 +1,7 @@
-﻿
+﻿using IntravisionTestTask.Domain.Dto;
+using IntravisionTestTask.Domain.Entities;
 
-public class ProductToUpdate
+public class ProductToUpdate : IUpdateDto<Product, Guid>
 {
     public Guid Id { get; set; }
     public Guid ProductTypeId { get; set; }

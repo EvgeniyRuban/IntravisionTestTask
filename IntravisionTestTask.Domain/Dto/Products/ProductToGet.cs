@@ -1,6 +1,8 @@
-﻿namespace IntravisionTestTask.Domain.Dto
+﻿using IntravisionTestTask.Domain.Entities;
+
+namespace IntravisionTestTask.Domain.Dto
 {
-    public class ProductToGet
+    public class ProductToGet : IGetDto<Product, Guid>
     {
         public Guid Id { get; set; }
         public Guid ProductTypeId { get; set; }
