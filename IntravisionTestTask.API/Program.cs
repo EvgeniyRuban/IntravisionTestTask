@@ -12,6 +12,7 @@ builder.Services.RegisterServices();
 
 var app = builder.Build();
 
+app.UseCors(options => options.SetIsOriginAllowed(x => _ = true).AllowAnyMethod().AllowAnyHeader().AllowCredentials());
 app.ConfigureExceptionHandler(app.Logger);
 
 if (app.Environment.IsDevelopment())

@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntravisionTestTask.Postgre
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntravisionTestTask.Business", "..\IntravisionTestTask.Business\IntravisionTestTask.Business.csproj", "{C3495EF7-E5C1-488E-B6CD-DAAB301176A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntravisionTestTask.WebUI", "..\IntravisionTestTask.WebUI\IntravisionTestTask.WebUI.csproj", "{F1410244-6FBE-4C30-A4F6-BF88BF1CF352}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C3495EF7-E5C1-488E-B6CD-DAAB301176A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3495EF7-E5C1-488E-B6CD-DAAB301176A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3495EF7-E5C1-488E-B6CD-DAAB301176A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1410244-6FBE-4C30-A4F6-BF88BF1CF352}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1410244-6FBE-4C30-A4F6-BF88BF1CF352}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1410244-6FBE-4C30-A4F6-BF88BF1CF352}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1410244-6FBE-4C30-A4F6-BF88BF1CF352}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
