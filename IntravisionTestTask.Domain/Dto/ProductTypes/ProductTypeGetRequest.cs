@@ -1,10 +1,11 @@
 ﻿using IntravisionTestTask.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace IntravisionTestTask.Domain.Dto
 {
-    public class ProductTypeToGet : IGetDto<ProductType, Guid>
+    public class ProductTypeGetRequest : IGetRequest<ProductType, Guid>
     {
+        [Required]
         public Guid Id { get; set; }
-        public string Title { get; set; }
     }
 }

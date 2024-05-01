@@ -8,9 +8,8 @@ namespace IntravisionTestTask.DAL.EF.Configurations
     {
         public void Configure(EntityTypeBuilder<ProductType> builder)
         {
-            builder
-                .HasIndex(pt => pt.Title)
-                .IsUnique(true);
+            builder.HasKey(x => x.Id);
+            builder.HasAlternateKey(x => x.Title);
         }
     }
 }

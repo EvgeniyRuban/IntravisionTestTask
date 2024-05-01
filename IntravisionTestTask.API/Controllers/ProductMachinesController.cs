@@ -15,16 +15,16 @@ namespace IntravisionTestTask.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProductMachineToGet>> Add(
-            [FromBody] ProductMachineToCreate dto,
+        public async Task<ActionResult<ProductMachineCreateResponse>> Add(
+            [FromBody] ProductMachineCreateRequest request,
             CancellationToken cancellationToken)
         {
-            var result = await _service.Add(dto, cancellationToken);
+            var result = await _service.Add(request, cancellationToken);
             return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(
+        public async Task<ActionResult> DeleteById(
             [FromRoute] Guid id,
             CancellationToken cancellationToken)
         {
@@ -33,16 +33,20 @@ namespace IntravisionTestTask.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductMachineToGet>> Get(
+        public async Task<ActionResult<ProductMachineGetResponse>> GetById(
             [FromRoute] Guid id,
             CancellationToken cancellationToken)
         {
-            var result = await _service.Get(id, cancellationToken);
+            var request = new ProductMachineGetRequest
+            {
+                Id = id
+            };
+            var result = await _service.Get(request, cancellationToken);
             return Ok(result);
         }
 
         [HttpGet]
-        public async Task<ActionResult<ICollection<ProductMachineToGet>>> GetAll(CancellationToken cancellationToken)
+        public async Task<ActionResult<ICollection<ProductMachineGetResponse>>> GetAll(CancellationToken cancellationToken)
         {
             var result = await _service.GetAll(cancellationToken);
             return Ok(result);
@@ -50,10 +54,29 @@ namespace IntravisionTestTask.API.Controllers
 
         [HttpPut]
         public async Task<ActionResult> Update(
-            [FromBody] ProductMachineToUpdate dto,
+            [FromBody] ProductMachineUpdateRequest request,
             CancellationToken cancellationToken)
         {
-            await _service.Update(dto, cancellationToken);
+            await _service.Update(request, cancellationToken);
+            return Ok();
+        }
+
+        [HttpPut("{id}/add/{productSlotId}")]
+        public async Task<ActionResult> AddProductSlotById(
+            [FromRoute] Guid id,
+            [FromRoute] Guid productSlotId,
+            CancellationToken cancellationToken)
+        {
+            await _service.AddProductSlotById(id, productSlotId, cancellationToken);
+            return Ok();
+        }
+
+        [HttpPut("{id}/clear")]
+        public async Task<ActionResult> Clear(
+            [FromRoute] Guid id, 
+            CancellationToken cancellationToken)
+        {
+            await _service.Clear(id, cancellationToken);
             return Ok();
         }
     }

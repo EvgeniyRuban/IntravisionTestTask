@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace IntravisionTestTask.PostgreSQL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240420122328_InitMigration")]
-    partial class InitMigration
+    [Migration("20240426172859_UpdateProduct3")]
+    partial class UpdateProduct3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,14 +30,13 @@ namespace IntravisionTestTask.PostgreSQL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
-                    b.Property<Guid>("ProductTypeId")
+                    b.Property<Guid?>("ProductSlotId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ProductTypeId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Title")
@@ -45,6 +44,8 @@ namespace IntravisionTestTask.PostgreSQL.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductSlotId");
 
                     b.HasIndex("ProductTypeId");
 
@@ -56,6 +57,9 @@ namespace IntravisionTestTask.PostgreSQL.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -71,15 +75,13 @@ namespace IntravisionTestTask.PostgreSQL.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("text");
 
                     b.Property<Guid?>("ProductMachineId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
 
                     b.HasIndex("ProductMachineId");
 
@@ -98,6 +100,8 @@ namespace IntravisionTestTask.PostgreSQL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Title")
                         .IsUnique();
 
@@ -106,33 +110,36 @@ namespace IntravisionTestTask.PostgreSQL.Migrations
 
             modelBuilder.Entity("IntravisionTestTask.Domain.Entities.Product", b =>
                 {
+                    b.HasOne("IntravisionTestTask.Domain.Entities.ProductSlot", "ProductSlot")
+                        .WithMany("Products")
+                        .HasForeignKey("ProductSlotId");
+
                     b.HasOne("IntravisionTestTask.Domain.Entities.ProductType", "ProductType")
                         .WithMany()
-                        .HasForeignKey("ProductTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductTypeId");
+
+                    b.Navigation("ProductSlot");
 
                     b.Navigation("ProductType");
                 });
 
             modelBuilder.Entity("IntravisionTestTask.Domain.Entities.ProductSlot", b =>
                 {
-                    b.HasOne("IntravisionTestTask.Domain.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("IntravisionTestTask.Domain.Entities.ProductMachine", null)
+                    b.HasOne("IntravisionTestTask.Domain.Entities.ProductMachine", "ProductMachine")
                         .WithMany("ProductSlots")
                         .HasForeignKey("ProductMachineId");
 
-                    b.Navigation("Product");
+                    b.Navigation("ProductMachine");
                 });
 
             modelBuilder.Entity("IntravisionTestTask.Domain.Entities.ProductMachine", b =>
                 {
                     b.Navigation("ProductSlots");
+                });
+
+            modelBuilder.Entity("IntravisionTestTask.Domain.Entities.ProductSlot", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

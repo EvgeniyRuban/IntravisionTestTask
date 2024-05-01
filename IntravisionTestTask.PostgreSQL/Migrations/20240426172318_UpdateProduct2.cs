@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IntravisionTestTask.PostgreSQL.Migrations
 {
-    public partial class InitMigration : Migration
+    public partial class UpdateProduct2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,8 @@ namespace IntravisionTestTask.PostgreSQL.Migrations
                 name: "ProductMachines",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Capacity = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,27 +31,7 @@ namespace IntravisionTestTask.PostgreSQL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProductTypes", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    ProductTypeId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Title = table.Column<string>(type: "text", nullable: false),
-                    Price = table.Column<decimal>(type: "numeric", nullable: false),
-                    ImageUrl = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_ProductTypes_ProductTypeId",
-                        column: x => x.ProductTypeId,
-                        principalTable: "ProductTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    table.UniqueConstraint("AK_ProductTypes_Title", x => x.Title);
                 });
 
             migrationBuilder.CreateTable(
@@ -58,9 +39,9 @@ namespace IntravisionTestTask.PostgreSQL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProductMachineId = table.Column<Guid>(type: "uuid", nullable: true),
                     Capacity = table.Column<int>(type: "integer", nullable: false),
-                    ProductMachineId = table.Column<Guid>(type: "uuid", nullable: true)
+                    ImageUrl = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -70,23 +51,43 @@ namespace IntravisionTestTask.PostgreSQL.Migrations
                         column: x => x.ProductMachineId,
                         principalTable: "ProductMachines",
                         principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ProductSlots_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProductTypeId = table.Column<Guid>(type: "uuid", nullable: true),
+                    ProductSlotId = table.Column<Guid>(type: "uuid", nullable: true),
+                    Title = table.Column<string>(type: "text", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.UniqueConstraint("AK_Products_Title", x => x.Title);
+                    table.ForeignKey(
+                        name: "FK_Products_ProductSlots_ProductSlotId",
+                        column: x => x.ProductSlotId,
+                        principalTable: "ProductSlots",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Products_ProductTypes_ProductTypeId",
+                        column: x => x.ProductTypeId,
+                        principalTable: "ProductTypes",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_ProductSlotId",
+                table: "Products",
+                column: "ProductSlotId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_ProductTypeId",
                 table: "Products",
                 column: "ProductTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductSlots_ProductId",
-                table: "ProductSlots",
-                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductSlots_ProductMachineId",
@@ -103,16 +104,16 @@ namespace IntravisionTestTask.PostgreSQL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ProductSlots");
-
-            migrationBuilder.DropTable(
-                name: "ProductMachines");
-
-            migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
+                name: "ProductSlots");
+
+            migrationBuilder.DropTable(
                 name: "ProductTypes");
+
+            migrationBuilder.DropTable(
+                name: "ProductMachines");
         }
     }
 }

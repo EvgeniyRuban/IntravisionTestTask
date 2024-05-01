@@ -17,29 +17,29 @@ namespace IntravisionTestTask.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<ProductToGet> Add(ProductToCreate dto, CancellationToken cancellationToken)
+        public async Task<ProductCreateResponse> Add(ProductCreateRequest request, CancellationToken cancellationToken)
         {
-            var entityToCreate = _mapper.Map<Product>(dto);
+            var entityToCreate = _mapper.Map<Product>(request);
             var newEntity = await _repository.Add(entityToCreate, cancellationToken);
-            return _mapper.Map<ProductToGet>(newEntity);
+            return _mapper.Map<ProductCreateResponse>(newEntity);
         }
         public async Task Delete(Guid key, CancellationToken cancellationToken)
         {
             await _repository.Delete(key, cancellationToken);
         }
-        public async Task<ProductToGet> Get(Guid key, CancellationToken cancellationToken)
+        public async Task<ProductGetResponse> Get(ProductGetRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _repository.Get(key, cancellationToken);
-            return _mapper.Map<ProductToGet>(entity);
+            var entity = await _repository.Get(request.Id, cancellationToken);
+            return _mapper.Map<ProductGetResponse>(entity);
         }
-        public async Task<ICollection<ProductToGet>> GetAll(CancellationToken cancellationToken)
+        public async Task<ICollection<ProductGetResponse>> GetAll(CancellationToken cancellationToken)
         {
             var entities = await _repository.GetAll(cancellationToken);
-            return _mapper.Map<ICollection<ProductToGet>>(entities);
+            return _mapper.Map<ICollection<ProductGetResponse>>(entities);
         }
-        public async Task Update(ProductToUpdate updateDto, CancellationToken cancellationToken)
+        public async Task Update(ProductUpdateRequest request, CancellationToken cancellationToken)
         {
-            var entity = _mapper.Map<Product>(updateDto);
+            var entity = _mapper.Map<Product>(request);
             await _repository.Update(entity, cancellationToken);
         }
     }

@@ -9,10 +9,12 @@ namespace IntravisionTestTask.Domain.MapperProfiles
         public ProductTypeProfile()
         {
             CreateMap<ProductType, ProductType>();
-            CreateMap<ProductTypeToCreate, ProductType>();
-            CreateMap<ProductTypeToUpdate, ProductType>();
-            CreateMap<ProductType, ProductTypeToGet>();
-            CreateMap<ProductType[], ProductTypeToGet[]>();
+            CreateMap<ProductTypeGetRequest, ProductType>();
+            CreateMap<ProductTypeCreateRequest, ProductType>();
+            CreateMap<ProductTypeUpdateRequest, ProductType>();
+            CreateMap<ProductType, ProductTypeCreateResponse>();
+            CreateMap<ProductType, ProductTypeGetResponse>();
+            CreateMap<ProductType[], ProductTypeGetResponse[]>();
         }
     }
 }

@@ -17,29 +17,37 @@ namespace IntravisionTestTask.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<ProductSlotToGet> Add(ProductSlotToCreate dto, CancellationToken cancellationToken)
+        public async Task<ProductSlotCreateResponse> Add(ProductSlotCreateRequest request, CancellationToken cancellationToken)
         {
-            var entityToCreate = _mapper.Map<ProductSlot>(dto);
+            var entityToCreate = _mapper.Map<ProductSlot>(request);
             var newEntity = await _repository.Add(entityToCreate, cancellationToken);
-            return _mapper.Map<ProductSlotToGet>(newEntity);
+            return _mapper.Map<ProductSlotCreateResponse>(newEntity);
+        }
+        public async Task AddProductById(Guid id, Guid productId, CancellationToken cancellationToken)
+        {
+            await _repository.AddProductById(id, productId, cancellationToken);
+        }
+        public async Task Clear(Guid id, CancellationToken cancellation)
+        {
+            await _repository.Clear(id, cancellation);
         }
         public async Task Delete(Guid key, CancellationToken cancellationToken)
         {
             await _repository.Delete(key, cancellationToken);
         }
-        public async Task<ProductSlotToGet> Get(Guid key, CancellationToken cancellationToken)
+        public async Task<ProductSlotGetResponse> Get(ProductSlotGetRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _repository.Get(key, cancellationToken);
-            return _mapper.Map<ProductSlotToGet>(entity);
+            var entity = await _repository.Get(request.Id, cancellationToken);
+            return _mapper.Map<ProductSlotGetResponse>(entity);
         }
-        public async Task<ICollection<ProductSlotToGet>> GetAll(CancellationToken cancellationToken)
+        public async Task<ICollection<ProductSlotGetResponse>> GetAll(CancellationToken cancellationToken)
         {
             var entities = await _repository.GetAll(cancellationToken);
-            return _mapper.Map<ICollection<ProductSlotToGet>>(entities);
+            return _mapper.Map<ICollection<ProductSlotGetResponse>>(entities);
         }
-        public async Task Update(ProductSlotToUpdate updateDto, CancellationToken cancellationToken)
+        public async Task Update(ProductSlotUpdateRequest request, CancellationToken cancellationToken)
         {
-            var entity = _mapper.Map<ProductSlot>(updateDto);
+            var entity = _mapper.Map<ProductSlot>(request);
             await _repository.Update(entity, cancellationToken);
         }
     }

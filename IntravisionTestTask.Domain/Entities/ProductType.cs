@@ -8,7 +8,8 @@ namespace IntravisionTestTask.Domain.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        [Required]
+
+        [Key]
         public string Title { get; set; } = null!; 
     }
 }

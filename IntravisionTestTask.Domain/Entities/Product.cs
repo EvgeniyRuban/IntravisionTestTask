@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IntravisionTestTask.Domain.Entities
 {
@@ -7,18 +6,11 @@ namespace IntravisionTestTask.Domain.Entities
     {
         [Key]
         public Guid Id { get; set; }
+        public Guid? ProductTypeId { get; set; }
+        public Guid? ProductSlotId { get; set; }
+        public string Title { get; set; }
 
-        [Required]
-        [InverseProperty(nameof(Entities.ProductType.Id))]
-        public Guid ProductTypeId { get; set; }
-
-        [Required]
-        public string Title { get; set; } = null!;
-
-        [Required]
-        public decimal Price { get; set; }
-        public string ImageUrl { get; set; } = null!;
-
+        public ProductSlot ProductSlot { get; set; }
         public ProductType ProductType { get; set; }
     }
 }

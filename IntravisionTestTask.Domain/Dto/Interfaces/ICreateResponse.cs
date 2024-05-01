@@ -2,7 +2,7 @@
 
 namespace IntravisionTestTask.Domain.Dto
 {
-    public interface IUpdateDto<TEntity, TKey> : IDto<TEntity, TKey>
+    public interface ICreateResponse<TEntity, TKey> : IResponse<TEntity, TKey>
         where TKey : struct
         where TEntity : class, IEntity<TKey>
     {

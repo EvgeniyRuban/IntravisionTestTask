@@ -3,7 +3,8 @@ using IntravisionTestTask.Domain.Entities;
 
 namespace IntravisionTestTask.Domain.Services
 {
-    public interface IProductTypeService : ICrudService<ProductType, Guid, ProductTypeToGet, ProductTypeToCreate, ProductTypeToUpdate>
+    public interface IProductTypeService : ICrudService<ProductType, Guid, ProductTypeGetRequest, 
+        ProductTypeGetResponse, ProductTypeCreateRequest, ProductTypeCreateResponse, ProductTypeUpdateRequest>
     {
     }
 }

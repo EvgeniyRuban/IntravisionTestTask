@@ -2,7 +2,7 @@
 
 namespace IntravisionTestTask.Domain.Dto
 {
-    public class ProductMachineToCreate : ICreateDto<ProductMachine, Guid>
+    public class ProductMachineCreateRequest : ICreateRequest<ProductMachine, Guid>
     {
     }
 }

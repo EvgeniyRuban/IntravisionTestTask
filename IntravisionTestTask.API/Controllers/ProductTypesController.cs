@@ -16,16 +16,16 @@ namespace IntravisionTestTask.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProductTypeToGet>> Add(
-            [FromBody] ProductTypeToCreate dto,
+        public async Task<ActionResult<ProductTypeCreateResponse>> Add(
+            [FromBody] ProductTypeCreateRequest request,
             CancellationToken cancellationToken)
         {
-            var result = await _service.Add(dto, cancellationToken);
+            var result = await _service.Add(request, cancellationToken);
             return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(
+        public async Task<ActionResult> DeleteById(
             [FromRoute] Guid id,
             CancellationToken cancellationToken)
         {
@@ -34,16 +34,20 @@ namespace IntravisionTestTask.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductTypeToGet>> Get(
+        public async Task<ActionResult<ProductTypeGetResponse>> GetById(
             [FromRoute] Guid id,
             CancellationToken cancellationToken)
         {
-            var result = await _service.Get(id, cancellationToken);
+            var request = new ProductTypeGetRequest
+            {
+                Id = id
+            };
+            var result = await _service.Get(request, cancellationToken);
             return Ok(result);
         }
 
         [HttpGet]
-        public async Task<ActionResult<ICollection<ProductTypeToGet>>> GetAll(CancellationToken cancellationToken)
+        public async Task<ActionResult<ICollection<ProductTypeGetResponse>>> GetAll(CancellationToken cancellationToken)
         {
             var productTypes = await _service.GetAll(cancellationToken);
             return Ok(productTypes);
@@ -51,10 +55,10 @@ namespace IntravisionTestTask.API.Controllers
 
         [HttpPut]
         public async Task<ActionResult> Update(
-            [FromBody] ProductTypeToUpdate dto,
+            [FromBody] ProductTypeUpdateRequest request,
             CancellationToken cancellationToken)
         {
-            await _service.Update(dto, cancellationToken);
+            await _service.Update(request, cancellationToken);
             return Ok();
         }
     }

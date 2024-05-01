@@ -3,17 +3,19 @@ using IntravisionTestTask.Domain.Entities;
 
 namespace IntravisionTestTask.Domain.Services
 {
-    public interface ICrudService<TEntity, TKey, TGetDto, TCreateDto, TUpdateDto>
+    public interface ICrudService<TEntity, TKey, TGetRequest, TGetResponse, TCreateRequest, TCreateResponse, TUpdateRequest>
         where TKey : struct
         where TEntity : class, IEntity<TKey>
-        where TGetDto : class, IGetDto<TEntity, TKey>
-        where TCreateDto : class, ICreateDto<TEntity, TKey>
-        where TUpdateDto : class, IUpdateDto<TEntity, TKey>
+        where TGetRequest : class, IGetRequest<TEntity, TKey>
+        where TGetResponse : class, IGetResponse<TEntity, TKey>
+        where TCreateRequest : class, ICreateRequest<TEntity, TKey>
+        where TCreateResponse : class, ICreateResponse<TEntity, TKey>
+        where TUpdateRequest : class, IUpdateRequest<TEntity, TKey>
     {
-        Task<TGetDto> Add(TCreateDto dto, CancellationToken cancellationToken);
-        Task<TGetDto> Get(TKey key, CancellationToken cancellationToken);
-        Task<ICollection<TGetDto>> GetAll(CancellationToken cancellationToken);
-        Task Update(TUpdateDto updateDto, CancellationToken cancellationToken);
+        Task<TCreateResponse> Add(TCreateRequest request, CancellationToken cancellationToken);
+        Task<TGetResponse> Get(TGetRequest request, CancellationToken cancellationToken);
+        Task<ICollection<TGetResponse>> GetAll(CancellationToken cancellationToken);
+        Task Update(TUpdateRequest request, CancellationToken cancellationToken);
         Task Delete(TKey key, CancellationToken cancellationToken);
     }
 }

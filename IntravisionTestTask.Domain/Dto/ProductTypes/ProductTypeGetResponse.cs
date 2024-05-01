@@ -2,8 +2,9 @@
 
 namespace IntravisionTestTask.Domain.Dto
 {
-    public class ProductTypeToCreate : ICreateDto<ProductType, Guid>
+    public class ProductTypeGetResponse : IGetResponse<ProductType, Guid>
     {
+        public Guid Id { get; set; }
         public string Title { get; set; }
     }
 }

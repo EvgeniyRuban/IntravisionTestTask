@@ -5,20 +5,21 @@ namespace IntravisionTestTask.Domain.Entities
 {
     public class ProductSlot : IEntity<Guid>
     {
+        [Required]
         public Guid Id { get; set; }
 
-        [Required]
-        [InverseProperty(nameof(Entities.Product.Id))]
-        public Guid ProductId { get; set; }
-
-        [Required]
         [InverseProperty(nameof(Entities.ProductMachine.Id))]
-        public Guid ProductMachineId { get; set; }
+        public Guid? ProductMachineId { get; set; }
 
         [Required]
         public int Capacity { get; set; }
 
-        public Product Product { get; set; }
+        [Required]
+        public decimal Price { get; set; }
+
+        public string? ImageUrl { get; set; }
+
+        public ICollection<Product> Products { get; set; }
         public ProductMachine ProductMachine { get; set; }
     }
 }

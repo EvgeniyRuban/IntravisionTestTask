@@ -16,16 +16,16 @@ namespace IntravisionTestTask.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProductToGet>> Add(
-            [FromBody] ProductToCreate dto,
+        public async Task<ActionResult<ProductCreateResponse>> Add(
+            [FromBody] ProductCreateRequest request,
             CancellationToken cancellationToken)
         {
-            var result = await _service.Add(dto, cancellationToken);
+            var result = await _service.Add(request, cancellationToken);
             return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(
+        public async Task<ActionResult> DeleteById(
             [FromRoute] Guid id,
             CancellationToken cancellationToken)
         {
@@ -34,16 +34,20 @@ namespace IntravisionTestTask.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductToGet>> Get(
+        public async Task<ActionResult<ProductGetResponse>> GetById(
             [FromRoute] Guid id,
             CancellationToken cancellationToken)
         {
-            var result = await _service.Get(id, cancellationToken);
+            var request = new ProductGetRequest
+            {
+                Id = id,
+            };
+            var result = await _service.Get(request, cancellationToken);
             return Ok(result);
         }
 
         [HttpGet]
-        public async Task<ActionResult<ICollection<ProductToGet>>> GetAll(CancellationToken cancellationToken)
+        public async Task<ActionResult<ICollection<ProductGetResponse>>> GetAll(CancellationToken cancellationToken)
         {
             var result = await _service.GetAll(cancellationToken);
             return Ok(result);
@@ -51,10 +55,10 @@ namespace IntravisionTestTask.API.Controllers
 
         [HttpPut]
         public async Task<ActionResult> Update(
-            [FromBody] ProductToUpdate dto,
+            [FromBody] ProductUpdateRequest request,
             CancellationToken cancellationToken)
         {
-            await _service.Update(dto, cancellationToken);
+            await _service.Update(request, cancellationToken);
             return Ok();
         }
     }

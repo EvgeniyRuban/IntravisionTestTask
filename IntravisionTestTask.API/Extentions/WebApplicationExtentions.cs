@@ -21,6 +21,13 @@ namespace IntravisionTestTask.API.Extentions
                             EntityNotFoundException => StatusCodes.Status404NotFound,
                             EntityAlreadyExistsException => StatusCodes.Status400BadRequest,
                             InvalidOperationException => StatusCodes.Status400BadRequest,
+                            ProductAlreadyPlacedException => StatusCodes.Status400BadRequest,
+                            ProductSlotHasNoSpaceException => StatusCodes.Status400BadRequest,
+                            ProductSlotLessCapacityException => StatusCodes.Status400BadRequest,
+                            ProductSlotTypeDifferentException => StatusCodes.Status400BadRequest,
+                            ProductMachineHasNoSpaceException => StatusCodes.Status400BadRequest,
+                            ProductSlotAlreadyPlacedException => StatusCodes.Status400BadRequest,
+                            ProductSlotProductTitleException => StatusCodes.Status400BadRequest,
                             _ => StatusCodes.Status500InternalServerError
                         };
 

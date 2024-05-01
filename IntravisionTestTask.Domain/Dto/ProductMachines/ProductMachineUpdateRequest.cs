@@ -1,12 +1,14 @@
 ﻿using IntravisionTestTask.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace IntravisionTestTask.Domain.Dto
 {
-    public class ProductSlotToGet : IGetDto<ProductSlot, Guid>
+    public class ProductMachineUpdateRequest : IUpdateRequest<ProductMachine, Guid>
     {
+        [Required]
         public Guid Id { get; set; }
-        public Guid ProductId { get; set; }
-        public Guid ProductMachineId { get; set; }
+
+        [Required]
         public int Capacity { get; set; }
     }
 }
