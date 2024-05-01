@@ -108,7 +108,7 @@ namespace IntravisionTestTask.DAL.Repositories
                 .Include(pm => pm.ProductSlots)
                 .FirstOrDefaultAsync(pm => pm.Id == id, cancellationToken);
 
-            if(productMachine is null)
+            if (productMachine is null)
             {
                 throw new EntityNotFoundException(typeof(ProductMachine));
             }
