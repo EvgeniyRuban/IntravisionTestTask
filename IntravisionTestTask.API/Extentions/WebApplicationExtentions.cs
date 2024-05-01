@@ -23,7 +23,7 @@ namespace IntravisionTestTask.API.Extentions
                             InvalidOperationException => StatusCodes.Status400BadRequest,
                             ProductAlreadyPlacedException => StatusCodes.Status400BadRequest,
                             ProductSlotHasNoSpaceException => StatusCodes.Status400BadRequest,
-                            ProductSlotLessCapacityException => StatusCodes.Status400BadRequest,
+                            EntityLessCapacityException => StatusCodes.Status400BadRequest,
                             ProductSlotTypeDifferentException => StatusCodes.Status400BadRequest,
                             ProductMachineHasNoSpaceException => StatusCodes.Status400BadRequest,
                             ProductSlotAlreadyPlacedException => StatusCodes.Status400BadRequest,

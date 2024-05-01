@@ -6,5 +6,6 @@ namespace IntravisionTestTask.Domain.Repositories
     {
         Task AddProductById(Guid id, Guid productId, CancellationToken cancellationToken);
         Task Clear(Guid id, CancellationToken cancellationToken);
+        Task<int> Fill(Guid id, string ProductTitle, CancellationToken cancellationToken);
     }
 }

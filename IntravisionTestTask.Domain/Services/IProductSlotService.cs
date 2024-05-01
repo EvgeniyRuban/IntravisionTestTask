@@ -8,5 +8,6 @@ namespace IntravisionTestTask.Domain.Services
     {
         Task AddProductById(Guid id, Guid productId, CancellationToken cancellationToken);
         Task Clear(Guid id, CancellationToken cancellationToken);
+        Task<int> Fill(Guid id, string productTitle, CancellationToken cancellationToken);
     }
 }

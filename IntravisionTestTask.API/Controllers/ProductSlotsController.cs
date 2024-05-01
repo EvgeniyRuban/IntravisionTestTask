@@ -80,5 +80,15 @@ namespace IntravisionTestTask.API.Controllers
             await _service.Clear(id, cancellationToken);
             return Ok();
         }
+
+        [HttpPut("{id}/fill/{productTitle}")]
+        public async Task<ActionResult<int>> Fill(
+            [FromRoute] Guid id,
+            [FromRoute] string productTitle,
+            CancellationToken cancellationToken)
+        {
+            var addedProductCount = await _service.Fill(id, productTitle, cancellationToken);
+            return Ok(addedProductCount);
+        }
     }
 }

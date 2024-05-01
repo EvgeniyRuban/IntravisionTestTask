@@ -127,22 +127,54 @@ namespace IntravisionTestTask.DAL.Repositories
         {
             var productSlot = await _context.ProductSlots.FirstOrDefaultAsync(e => e.Id == entityToUpdate.Id, cancellationToken);
 
-            if (productSlot == null)
+            if (productSlot is null)
             {
                 throw new EntityNotFoundException(typeof(ProductSlot));
             }
 
-            var products = await _context.Products
-                .Where(p => p.ProductSlotId == productSlot.Id)
-                .ToListAsync(cancellationToken);
+            var productsInSlotCount = await _context.Products.CountAsync(p => p.ProductSlotId == productSlot.Id);
 
-            if (entityToUpdate.Capacity < products.Count)
+            if (entityToUpdate.Capacity < productsInSlotCount)
             {
-                throw new ProductSlotLessCapacityException();
+                throw new EntityLessCapacityException(typeof(ProductSlot));
             }
 
             _mapper.Map(entityToUpdate, productSlot);
             await _context.SaveChangesAsync(cancellationToken);
+        }
+        public async Task<int> Fill(Guid id, string productTitle, CancellationToken cancellationToken)
+        {
+            var productSlot = await _context.ProductSlots
+                .Include(ps => ps.Products)
+                .FirstOrDefaultAsync(ps => ps.Id == id, cancellationToken);
+
+            if (productSlot is null)
+            {
+                throw new EntityNotFoundException(typeof(ProductSlot));
+            }
+
+            var productContainedInSlot = productSlot.Products.FirstOrDefault();
+
+            if (productContainedInSlot is not null && productContainedInSlot.Title != productTitle)
+            {
+                throw new ProductSlotProductTitleException();
+            }
+
+            var freeSpace = productSlot.Capacity - productSlot.Products.Count;
+
+            var products = await _context.Products
+                .Where(p => p.Title == productTitle && p.ProductSlotId == null)
+                .Take(freeSpace)
+                .ToListAsync(cancellationToken);
+
+            products.ForEach(p =>
+            {
+                productSlot.Products.Add(p);
+            });
+
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return products.Count;
         }
     }
 }

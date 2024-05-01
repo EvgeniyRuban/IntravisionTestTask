@@ -50,14 +50,21 @@ namespace IntravisionTestTask.DAL.Repositories
         }
         public async Task Update(ProductMachine entityToUpdate, CancellationToken cancellationToken)
         {
-            var entity = await _context.ProductMachines.FirstOrDefaultAsync(e => e.Id == entityToUpdate.Id, cancellationToken);
+            var productMachine = await _context.ProductMachines.FirstOrDefaultAsync(e => e.Id == entityToUpdate.Id, cancellationToken);
 
-            if(entity == null)
+            if(productMachine == null)
             {
                 throw new EntityNotFoundException(typeof(ProductMachine));
             }
 
-            _mapper.Map(entityToUpdate, entity);
+            var productSlotsInMachineCount = await _context.ProductSlots.CountAsync(ps => ps.ProductMachineId == productMachine.Id);
+
+            if (entityToUpdate.Capacity < productSlotsInMachineCount)
+            {
+                throw new EntityLessCapacityException(typeof(ProductMachine));
+            }
+
+            _mapper.Map(entityToUpdate, productMachine);
             await _context.SaveChangesAsync(cancellationToken);
         }
         public async Task AddProductSlotById(Guid id, Guid productSlotId, CancellationToken cancellationToken)

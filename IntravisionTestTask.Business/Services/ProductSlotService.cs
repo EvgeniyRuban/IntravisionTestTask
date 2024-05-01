@@ -50,5 +50,9 @@ namespace IntravisionTestTask.Business.Services
             var entity = _mapper.Map<ProductSlot>(request);
             await _repository.Update(entity, cancellationToken);
         }
+        public async Task<int> Fill(Guid id, string productTitle, CancellationToken cancellationToken)
+        {
+            return await _repository.Fill(id, productTitle, cancellationToken);
+        }
     }
 }
