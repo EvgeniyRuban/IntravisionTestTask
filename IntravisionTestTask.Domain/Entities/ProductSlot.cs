@@ -17,6 +17,7 @@ namespace IntravisionTestTask.Domain.Entities
         [Required]
         public decimal Price { get; set; }
 
+        [MaxLength(200)]
         public string? ImageUrl { get; set; }
 
         public ICollection<Product> Products { get; set; }

@@ -8,7 +8,9 @@ namespace IntravisionTestTask.Domain.MapperProfiles
     {
         public ProductProfile()
         {
-            CreateMap<Product, Product>();
+            CreateMap<Product, Product>()
+                .ForMember(dest => dest.Title, opt => opt
+                .Ignore());
             CreateMap<ProductGetRequest, Product>();
             CreateMap<ProductCreateRequest, Product>();
             CreateMap<ProductUpdateRequest, Product>();

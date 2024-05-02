@@ -7,7 +7,6 @@ namespace IntravisionTestTask.Domain.Dto
     {
         [Required]
         public Guid ProductTypeId { get; set; }
-        public Guid? ProductSlotId { get; set; }
 
         [Required]
         public string Title { get; set; }

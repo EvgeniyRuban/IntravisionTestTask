@@ -3,9 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drink machine</title>
+    <title>Product machine</title>
+    <link rel="stylesheet" href="/css/index.css"></link>
 </head>
 <body>
-    <script type="module" src="index.js"></script>
+    <script type="module" src="/js/index.js"></script>
+    <div id="root">
+        <header>
+            <p>Select product machine: 
+                <select id="product-machine-list">
+                </select>
+                <button id="admin-page-button">Admin</button>
+            </p>
+            <hr>
+        </header>
+        <section id="content-section"></section>
+        <hr class="spliter">
+        <section id="input-section">
+            <button>1</button>
+            <button>2</button>
+            <button>5</button>
+            <button>10</button>
+        </section>
+    </div>
 </body>
 </html>

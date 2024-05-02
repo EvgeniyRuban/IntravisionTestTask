@@ -18,4 +18,8 @@
     <ProjectReference Include="..\IntravisionTestTask.Domain\IntravisionTestTask.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EF\Configurations\" />
+  </ItemGroup>
+
 </Project>

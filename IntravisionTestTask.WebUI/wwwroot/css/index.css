@@ -1,0 +1,11 @@
+header {
+    #admin-page-button {
+        right: 20px;
+        position: absolute;
+    }
+}
+
+section {
+    float: left;
+    width: 30%;
+}

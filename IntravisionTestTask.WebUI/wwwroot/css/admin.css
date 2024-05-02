@@ -1,0 +1,8 @@
+.header {
+    position: relative;
+    
+    #public-page-button {
+        right: 20px;
+        position: absolute;
+    }
+}

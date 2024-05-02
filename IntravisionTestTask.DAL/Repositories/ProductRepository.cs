@@ -20,6 +20,25 @@ namespace IntravisionTestTask.DAL.Repositories
 
         public async Task<Product> Add(Product entity, CancellationToken cancellationToken)
         {
+            var productType = await _context.ProductTypes
+                .FirstOrDefaultAsync(pt => pt.Id ==  entity.ProductTypeId, cancellationToken);
+
+            if (productType is null)
+            {
+                throw new EntityNotFoundException(typeof(ProductType));
+            }
+
+            if (entity.ProductSlotId is not null)
+            {
+                var productSlot = await _context.ProductSlots
+                    .FirstOrDefaultAsync(ps => ps.Id == entity.ProductSlotId, cancellationToken);
+
+                if (productSlot is null)
+                {
+                    throw new EntityNotFoundException(typeof (ProductSlot));
+                }
+            }
+
             var newEntity = await _context.Products.AddAsync(entity, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
             return newEntity.Entity;

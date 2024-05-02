@@ -62,7 +62,7 @@ namespace IntravisionTestTask.API.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}/add/{productId}")]
+        [HttpPatch("{id}/add/{productId}")]
         public async Task<ActionResult> AddProductById(
             [FromRoute] Guid id,
             [FromRoute] Guid productId, 
@@ -72,7 +72,7 @@ namespace IntravisionTestTask.API.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}/clear")]
+        [HttpPatch("{id}/clear")]
         public async Task<ActionResult> Clear(
             [FromRoute] Guid id, 
             CancellationToken cancellationToken)
@@ -81,7 +81,7 @@ namespace IntravisionTestTask.API.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}/fill/{productTitle}")]
+        [HttpPatch("{id}/fill/{productTitle}")]
         public async Task<ActionResult<int>> Fill(
             [FromRoute] Guid id,
             [FromRoute] string productTitle,
