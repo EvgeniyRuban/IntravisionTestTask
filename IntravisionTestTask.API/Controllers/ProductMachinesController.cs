@@ -61,7 +61,7 @@ namespace IntravisionTestTask.API.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}/add/{productSlotId}")]
+        [HttpPatch("{id}/add/{productSlotId}")]
         public async Task<ActionResult> AddProductSlotById(
             [FromRoute] Guid id,
             [FromRoute] Guid productSlotId,
@@ -71,7 +71,7 @@ namespace IntravisionTestTask.API.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}/clear")]
+        [HttpPatch("{id}/clear")]
         public async Task<ActionResult> Clear(
             [FromRoute] Guid id, 
             CancellationToken cancellationToken)
